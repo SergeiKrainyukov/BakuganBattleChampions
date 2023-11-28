@@ -1,0 +1,1 @@
+![Экран меню](./screens/menu_screen.png "Экран меню")
