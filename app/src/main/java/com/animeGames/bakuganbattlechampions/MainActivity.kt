@@ -18,7 +18,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             BakuganBattleChampionsTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -35,7 +34,7 @@ fun App() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main") {
         composable("main") { MenuScreen(navController) }
-        composable("campaign") { /* ... */ }
+        composable("campaign") { BattlesScreen() }
         composable("collections") { /* ... */ }
         composable("shop") { /* ... */ }
         composable("settings") { /* ... */ }
