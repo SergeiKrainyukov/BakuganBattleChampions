@@ -34,11 +34,12 @@ fun App() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main") {
         composable("main") { MenuScreen(navController) }
-        composable("campaign") { BattlesScreen() }
+        composable("campaign") { BattlesScreen(navController) }
         composable("collections") { /* ... */ }
         composable("shop") { /* ... */ }
         composable("settings") { /* ... */ }
         composable("profile") { /* ... */ }
+        composable("battle") { /* ... */ }
     }
 }
 

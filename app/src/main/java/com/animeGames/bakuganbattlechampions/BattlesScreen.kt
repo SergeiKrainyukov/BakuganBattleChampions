@@ -1,11 +1,15 @@
 package com.animeGames.bakuganbattlechampions
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,8 +18,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
+
+@Composable
+fun BattlesScreen(navController: NavController) {
+    val cardItems = listOf(
+        CardItem("Бой с Маручо", "Вам предстоит сразиться с противником стихии Аквос", "Уровень 1"),
+        CardItem(
+            "Бой с Шун Казами",
+            "Вам предстоит сразиться с противником стихии Вентус",
+            "Уровень 2"
+        ),
+    )
+
+    CardsList(navController, cardItems)
+}
 
 data class CardItem(
     val title: String,
@@ -24,20 +43,23 @@ data class CardItem(
 )
 
 @Composable
-fun CardsScreen(cardItems: List<CardItem>) {
+fun CardsList(navController: NavController, cardItems: List<CardItem>) {
     LazyColumn {
         items(cardItems) { cardItem ->
-            CardItemView(cardItem)
+            CardItemView(cardItem){
+                navController.navigate("battle")
+            }
         }
     }
 }
 
 @Composable
-fun CardItemView(cardItem: CardItem) {
+fun CardItemView(cardItem: CardItem, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(8.dp)
+            .clickable(onClick = onClick),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
         Column(
@@ -68,20 +90,10 @@ fun CardItemView(cardItem: CardItem) {
     }
 }
 
-@Composable
-fun BattlesScreen() {
-    val cardItems = listOf(
-        CardItem("Бой с Маручо", "Вам предстоит сразиться с противником стихии Аквос", "Уровень 1"),
-        CardItem("Бой с Шун Казами", "Вам предстоит сразиться с противником стихии Вентус", "Уровень 2"),
-    )
-
-    CardsScreen(cardItems)
-}
-
 @Preview(showBackground = true)
 @Composable
 fun BattlesScreenPreview() {
     BakuganBattleChampionsTheme {
-        BattlesScreen()
+        BattlesScreen(rememberNavController())
     }
 }
