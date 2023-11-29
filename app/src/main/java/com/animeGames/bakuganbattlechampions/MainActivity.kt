@@ -36,11 +36,12 @@ fun App() {
     NavHost(navController = navController, startDestination = "main") {
         composable("main") { MenuScreen(navController) }
         composable("campaign") { BattlesScreen(navController) }
-        composable("collections") { CollectionsScreen() }
+        composable("collections") { CollectionsScreen(navController) }
         composable("shop") { /* ... */ }
         composable("settings") { /* ... */ }
         composable("profile") { /* ... */ }
         composable("battle") { BattleScreen() }
+        composable("card_description") { CardDescriptionScreen() }
     }
 }
 

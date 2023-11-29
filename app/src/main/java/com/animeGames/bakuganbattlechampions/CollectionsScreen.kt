@@ -1,6 +1,7 @@
 package com.animeGames.bakuganbattlechampions
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -29,6 +30,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
 
 @Composable
@@ -54,11 +57,12 @@ fun FilterBar(filters: List<String>) {
 
 
 @Composable
-fun CardItem(imageId: Int, title: String, description: String) {
+fun CardItem(imageId: Int, title: String, description: String, onClick: () -> Unit) {
     Card(
         modifier = Modifier
             .padding(all = 8.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .clickable(onClick = onClick),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
@@ -84,7 +88,7 @@ fun CardItem(imageId: Int, title: String, description: String) {
 
 
 @Composable
-fun CollectionsScreen() {
+fun CollectionsScreen(navController: NavController) {
     val cardItems = listOf(
         Pair(R.drawable.baku_icon, "Pyrus Dragonoid" to "Very Strong Character"),
         Pair(R.drawable.baku_icon, "Pyrus Dragonoid" to "Very Strong Character"),
@@ -92,11 +96,13 @@ fun CollectionsScreen() {
     )
 
     Column {
-        FilterBar(listOf(
-            "Бакуганы",
-            "Карты вор.",
-            "Карты сп.",
-        ))
+        FilterBar(
+            listOf(
+                "Бакуганы",
+                "Карты вор.",
+                "Карты сп.",
+            )
+        )
 
         LazyColumn {
             items(cardItems) { cardItem ->
@@ -104,7 +110,9 @@ fun CollectionsScreen() {
                     imageId = cardItem.first,
                     title = cardItem.second.first,
                     description = cardItem.second.second
-                )
+                ) {
+                    navController.navigate("card_description")
+                }
             }
         }
     }
@@ -114,6 +122,6 @@ fun CollectionsScreen() {
 @Composable
 fun CollectionsScreenPreview() {
     BakuganBattleChampionsTheme {
-        CollectionsScreen()
+        CollectionsScreen(rememberNavController())
     }
 }
