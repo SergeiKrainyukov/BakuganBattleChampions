@@ -36,7 +36,7 @@ fun App() {
     NavHost(navController = navController, startDestination = "main") {
         composable("main") { MenuScreen(navController) }
         composable("campaign") { BattlesScreen(navController) }
-        composable("collections") { /* ... */ }
+        composable("collections") { CollectionsScreen() }
         composable("shop") { /* ... */ }
         composable("settings") { /* ... */ }
         composable("profile") { /* ... */ }
