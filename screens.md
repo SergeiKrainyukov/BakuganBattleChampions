@@ -2,3 +2,5 @@
 ![Экран кампании](./screens/battles_screen.png "Экран кампании")
 ![Экран битвы](./screens/battle_screen.png "Экран битвы")
 ![Экран коллекций](./screens/collections_screen.png "Экран коллекций")
+![Экран настроек](./screens/settings_screen.png "Экран настроек")
+![Экран описания карточки](./screens/card_description_screen.png "Экран описания карточки")

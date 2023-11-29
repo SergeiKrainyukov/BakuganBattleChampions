@@ -38,7 +38,7 @@ fun App() {
         composable("campaign") { BattlesScreen(navController) }
         composable("collections") { CollectionsScreen(navController) }
         composable("shop") { /* ... */ }
-        composable("settings") { /* ... */ }
+        composable("settings") { SettingsScreen() }
         composable("profile") { /* ... */ }
         composable("battle") { BattleScreen() }
         composable("card_description") { CardDescriptionScreen() }
