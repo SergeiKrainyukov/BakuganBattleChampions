@@ -12,6 +12,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
+import com.animeGames.bakuganbattlechampions.ui.theme.BattleScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +40,7 @@ fun App() {
         composable("shop") { /* ... */ }
         composable("settings") { /* ... */ }
         composable("profile") { /* ... */ }
-        composable("battle") { /* ... */ }
+        composable("battle") { BattleScreen() }
     }
 }
 
