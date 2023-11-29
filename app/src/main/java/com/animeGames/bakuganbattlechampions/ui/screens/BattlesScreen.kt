@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions
+package com.animeGames.bakuganbattlechampions.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column

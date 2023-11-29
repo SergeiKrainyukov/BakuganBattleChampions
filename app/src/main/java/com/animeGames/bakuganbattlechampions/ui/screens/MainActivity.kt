@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions
+package com.animeGames.bakuganbattlechampions.ui.screens
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

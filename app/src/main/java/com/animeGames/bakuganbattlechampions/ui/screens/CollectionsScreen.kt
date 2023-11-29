@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions
+package com.animeGames.bakuganbattlechampions.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.animeGames.bakuganbattlechampions.R
 import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
 
 @Composable
