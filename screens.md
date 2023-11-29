@@ -4,3 +4,4 @@
 ![Экран коллекций](./screens/collections_screen.png "Экран коллекций")
 ![Экран настроек](./screens/settings_screen.png "Экран настроек")
 ![Экран описания карточки](./screens/card_description_screen.png "Экран описания карточки")
+![Экран профиля](./screens/profile_screen.png "Экран профиля")
