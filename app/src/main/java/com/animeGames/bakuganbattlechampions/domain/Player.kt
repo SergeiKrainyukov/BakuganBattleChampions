@@ -7,7 +7,7 @@ abstract class Player {
     //Команды
     abstract fun removeCard(card: Card)
 
-    abstract fun removeBakugan(bakugan: Bakugan)
+    abstract fun removeBakugan(abstractBakugan: AbstractBakugan)
 
     //Запросы
     abstract fun getActualCards(): List<Card>
