@@ -3,8 +3,13 @@ package com.animeGames.bakuganbattlechampions.domain.entity
 abstract class Store {
 
     //команды
-    abstract fun buyBakugan(bakuganId: Id)
-    abstract fun buyCard(cardId: Id)
+    //предусловие: количество средств на счете игрока >= стоимости бакугана
+    //постусловие: бакуган с данным id находится в списке бакуганов, принадлежащих игроку в базе данных
+    abstract fun buyBakugan(bakuganId: Id) // успешно; на счете недостаточно средств
+
+    //предусловие: количество средств на счете игрока >= стоимости карты
+    //постусловие: карта с данным id находится в списке карт, принадлежащих игроку в базе данных
+    abstract fun buyCard(cardId: Id) // успешно; на счете недостаточно средств
 
     //запросы
     abstract fun getAllCards(): List<Card>

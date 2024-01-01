@@ -5,19 +5,21 @@ package com.animeGames.bakuganbattlechampions.domain.entity
 abstract class Player {
 
     //Команды
-    abstract fun removeCard(card: Card)
+    //Предусловие: карта существует в колоде
+    //Постусловие: карта удалена из колоды
+    abstract fun removeCard(cardId: Id) // успешно; Карты нет в колоде
 
-    abstract fun removeBakugan(abstractBakugan: AbstractBakugan)
+    //Предусловие: бакуган существует в колоде
+    //Постусловие: бакуган удален из колоды
+    abstract fun removeBakugan(abstractBakugan: AbstractBakugan) // успешно; Бакугана нет в колоде
 
     //Запросы
     abstract fun getActualCards(): List<Card>
-
     abstract fun getActualBakugans(): List<Card>
 
     //Запросы статусов:
-    abstract fun getRemoveCardStatus(): Int
-
-    abstract fun getRemoveBakuganStatus(): Int
+    abstract fun removeCardStatus(): Int
+    abstract fun removeBakuganStatus(): Int
 
     companion object {
         // Статусы

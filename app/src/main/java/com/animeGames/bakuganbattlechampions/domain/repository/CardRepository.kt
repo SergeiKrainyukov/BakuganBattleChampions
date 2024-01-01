@@ -5,6 +5,7 @@ import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 interface CardRepository {
     //Команды
+    //Постусловие: Карта с переданным id добавлена в список карт, принадлежащих игроку, в бд
     fun addCardForCurrentPlayer()
 
     //Запросы
