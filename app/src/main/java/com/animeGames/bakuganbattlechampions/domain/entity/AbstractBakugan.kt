@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.domain
+package com.animeGames.bakuganbattlechampions.domain.entity
 
 //АТД Бакуган
 abstract class AbstractBakugan {

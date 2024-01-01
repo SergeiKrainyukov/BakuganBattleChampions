@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.domain
+package com.animeGames.bakuganbattlechampions.domain.entity
 
 //АТД игрок
 //Его наследует как реальный пользователь, так и ии, против которого он играет.

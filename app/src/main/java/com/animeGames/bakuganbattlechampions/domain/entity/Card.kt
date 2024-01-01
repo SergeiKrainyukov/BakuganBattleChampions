@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.domain
+package com.animeGames.bakuganbattlechampions.domain.entity
 
 //АТД карта
 //Его будут наследовать конкретные классы Карты ворот и карты способностей
