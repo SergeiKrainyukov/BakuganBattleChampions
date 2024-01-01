@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.ui.theme
+package com.animeGames.bakuganbattlechampions.presentation.theme
 
 import androidx.compose.ui.graphics.Color
 

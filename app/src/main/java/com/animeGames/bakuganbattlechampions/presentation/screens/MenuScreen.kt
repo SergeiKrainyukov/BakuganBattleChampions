@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.ui.screens
+package com.animeGames.bakuganbattlechampions.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
+import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
 fun MenuScreen(navController: NavController) {

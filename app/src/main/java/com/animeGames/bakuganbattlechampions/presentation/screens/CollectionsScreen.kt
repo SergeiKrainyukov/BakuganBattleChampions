@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.ui.screens
+package com.animeGames.bakuganbattlechampions.presentation.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.animeGames.bakuganbattlechampions.R
-import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
+import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
 fun FilterBar(filters: List<String>) {

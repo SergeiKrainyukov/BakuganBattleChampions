@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.ui
+package com.animeGames.bakuganbattlechampions.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,14 +11,14 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.animeGames.bakuganbattlechampions.ui.screens.BattlesScreen
-import com.animeGames.bakuganbattlechampions.ui.screens.CardDescriptionScreen
-import com.animeGames.bakuganbattlechampions.ui.screens.CollectionsScreen
-import com.animeGames.bakuganbattlechampions.ui.screens.MenuScreen
-import com.animeGames.bakuganbattlechampions.ui.screens.ProfileScreen
-import com.animeGames.bakuganbattlechampions.ui.screens.SettingsScreen
-import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
-import com.animeGames.bakuganbattlechampions.ui.theme.BattleScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.BattlesScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.CardDescriptionScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.CollectionsScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.MenuScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.ProfileScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.SettingsScreen
+import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
+import com.animeGames.bakuganbattlechampions.presentation.theme.BattleScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

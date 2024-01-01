@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.ui.screens
+package com.animeGames.bakuganbattlechampions.presentation.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,8 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
-import com.animeGames.bakuganbattlechampions.ui.theme.BakuganBattleChampionsTheme
+import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
 fun SettingsScreen() {

@@ -1,4 +1,4 @@
-package com.animeGames.bakuganbattlechampions.ui.theme
+package com.animeGames.bakuganbattlechampions.presentation.theme
 
 import android.app.Activity
 import android.os.Build
