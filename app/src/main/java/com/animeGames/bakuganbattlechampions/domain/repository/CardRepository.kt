@@ -1,7 +1,7 @@
 package com.animeGames.bakuganbattlechampions.domain.repository
 
 import com.animeGames.bakuganbattlechampions.domain.entity.Card
-import com.animeGames.bakuganbattlechampions.domain.entity.Player
+import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 interface CardRepository {
     //Команды
@@ -9,5 +9,5 @@ interface CardRepository {
 
     //Запросы
     fun getCardsForCurrentPlayer(): List<Card>
-    fun getCardsForPlayer(player: Player): List<Card>
+    fun getCardsForPlayer(playerId: Id): List<Card>
 }
