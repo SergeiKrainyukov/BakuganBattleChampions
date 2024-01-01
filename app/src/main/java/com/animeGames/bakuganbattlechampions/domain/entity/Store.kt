@@ -2,13 +2,17 @@ package com.animeGames.bakuganbattlechampions.domain.entity
 
 abstract class Store {
 
-    //запросы
+    //команды
     abstract fun buyBakugan(bakuganId: Id)
     abstract fun buyCard(cardId: Id)
 
-    //команды
+    //запросы
     abstract fun getAllCards(): List<Card>
     abstract fun getAllBakugans(): List<AbstractBakugan>
+
+    //запросы статусов
+    abstract fun buyBakuganStatus(): Int
+    abstract fun buyCardStatus(): Int
 
     companion object {
         const val BUY_BAKUGAN_NIL = 0 //buyBakugan() еще не вызывалась

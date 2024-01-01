@@ -4,7 +4,6 @@ package com.animeGames.bakuganbattlechampions.domain.entity
 abstract class AbstractBakugan {
     //команды
     abstract fun takeDamage(damage: Int)
-
     abstract fun powerUp(powerBonus: Int)
 
     //запросы
