@@ -1,5 +1,6 @@
 package com.animeGames.bakuganbattlechampions.domain.entity
 
+//АТД Магазин
 abstract class Store {
 
     //команды
