@@ -1,8 +1,10 @@
-package com.animeGames.bakuganbattlechampions.domain.entity
+package com.animeGames.bakuganbattlechampions.domain.abstractTypes
+
+import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 //АТД карта
 //Его будут наследовать конкретные классы Карты ворот и карты способностей
-abstract class Card {
+abstract class AbstractCard {
     //команды
     //предусловие: карта еще не была активирована
     //постусловие: карта поменяла статус на активирована
@@ -11,6 +13,7 @@ abstract class Card {
     //запросы
     abstract fun isActivated(): Boolean
     abstract fun isNotActivated(): Boolean
+    abstract fun id(): Id
 
     //запросы статусов
     abstract fun activateStatus(): Int

@@ -1,34 +1,42 @@
 package com.animeGames.bakuganbattlechampions.domain.entity
 
-//АТД игрок
-//Его наследует как реальный пользователь, так и ии, против которого он играет.
-abstract class Player {
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakugan
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractPlayer
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
 
-    //Команды
-    //Предусловие: карта существует в колоде
-    //Постусловие: карта удалена из колоды
-    abstract fun removeCard(cardId: Id) // успешно; Карты нет в колоде
+class Player(
+    abstractCards: List<AbstractCard>,
+    bakugans: List<AbstractBakugan>
+) : AbstractPlayer() {
 
-    //Предусловие: бакуган существует в колоде
-    //Постусловие: бакуган удален из колоды
-    abstract fun removeBakugan(abstractBakugan: AbstractBakugan) // успешно; Бакугана нет в колоде
+    private val cards: MutableList<AbstractCard>
+    private val bakugans: MutableList<AbstractBakugan>
 
-    //Запросы
-    abstract fun getActualCards(): List<Card>
-    abstract fun getActualBakugans(): List<Card>
+    private var removeCardStatus = REMOVE_CARD_NIL
+    private var removeBakuganStatus = REMOVE_BAKUGAN_NIL
 
-    //Запросы статусов:
-    abstract fun removeCardStatus(): Int
-    abstract fun removeBakuganStatus(): Int
-
-    companion object {
-        // Статусы
-        private const val REMOVE_CARD_NIL = 0  // removeCard() не вызывался
-        private const val REMOVE_CARD_OK = 1 // Карта успешно удалена из колоды
-        private const val REMOVE_CARD_ERR = 2  // Карты нет в колоде
-
-        private const val REMOVE_BAKUGAN_NIL = 0   // removeBakugan() не вызывался
-        private const val REMOVE_BAKUGAN_OK = 1   // Бакуган успешно удален из колоды
-        private const val REMOVE_BAKUGAN_ERR = 2   // Бакугана нет в колоде
+    init {
+        this.cards = abstractCards.toMutableList()
+        this.bakugans = bakugans.toMutableList()
     }
+
+    override fun removeCard(cardId: Id) {
+        val previousSize = cards.size
+        cards.removeIf { it.id() == cardId }
+        removeCardStatus = if (cards.size < previousSize) REMOVE_CARD_OK else REMOVE_CARD_ERR
+    }
+
+    override fun removeBakugan(bakuganId: Id) {
+        val previousSize = bakugans.size
+        bakugans.removeIf { it.id() == bakuganId }
+        removeBakuganStatus = if (bakugans.size < previousSize) REMOVE_CARD_OK else REMOVE_CARD_ERR
+    }
+
+    override fun getActualCards() = cards
+
+    override fun getActualBakugans() = bakugans
+
+    override fun removeCardStatus() = removeCardStatus
+
+    override fun removeBakuganStatus() = removeBakuganStatus
 }

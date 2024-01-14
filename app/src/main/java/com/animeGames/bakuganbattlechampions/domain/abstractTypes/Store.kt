@@ -1,4 +1,6 @@
-package com.animeGames.bakuganbattlechampions.domain.entity
+package com.animeGames.bakuganbattlechampions.domain.abstractTypes
+
+import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 //АТД Магазин
 abstract class Store {
@@ -13,7 +15,7 @@ abstract class Store {
     abstract fun buyCard(cardId: Id) // успешно; на счете недостаточно средств
 
     //запросы
-    abstract fun getAllCards(): List<Card>
+    abstract fun getAllCards(): List<AbstractCard>
     abstract fun getAllBakugans(): List<AbstractBakugan>
 
     //запросы статусов

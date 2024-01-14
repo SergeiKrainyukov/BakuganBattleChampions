@@ -1,4 +1,6 @@
-package com.animeGames.bakuganbattlechampions.domain.entity
+package com.animeGames.bakuganbattlechampions.domain.abstractTypes
+
+import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 //АТД Хранилище
 abstract class Storage {
@@ -10,7 +12,7 @@ abstract class Storage {
     abstract fun upgradeBakugan(bakuganId: Id) // успешно; на счете недостаточно средств
 
     //запросы
-    abstract fun getAllCards(): List<Card>
+    abstract fun getAllCards(): List<AbstractCard>
     abstract fun getAllBakugans(): List<AbstractBakugan>
 
     //запросы статусов

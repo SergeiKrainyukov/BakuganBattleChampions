@@ -1,11 +1,16 @@
 package com.animeGames.bakuganbattlechampions.data.database
 
-import com.animeGames.bakuganbattlechampions.domain.entity.AbstractBakugan
-import com.animeGames.bakuganbattlechampions.domain.entity.Card
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakugan
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractPlayer
 import com.animeGames.bakuganbattlechampions.domain.entity.Player
 
 object AppDatabase {
-    val players: List<Player> = listOf()
+    val currentPlayer = Player(
+        listOf(),
+        listOf()
+    )
+    val abstractPlayers: List<AbstractPlayer> = listOf()
     val bakugans: List<AbstractBakugan> = listOf()
-    val cards: List<Card> = listOf()
+    val abstractCards: List<AbstractCard> = listOf()
 }

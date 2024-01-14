@@ -1,4 +1,7 @@
-package com.animeGames.bakuganbattlechampions.domain.entity
+package com.animeGames.bakuganbattlechampions.domain.abstractTypes
+
+import com.animeGames.bakuganbattlechampions.domain.entity.Id
+import com.animeGames.bakuganbattlechampions.domain.entity.Power
 
 //АТД Бакуган
 abstract class AbstractBakugan {
@@ -13,6 +16,10 @@ abstract class AbstractBakugan {
 
     //запросы
     abstract fun getActualPower(): Power
+    abstract fun id(): Id
+
+    //запросы статусов
+    abstract fun getTakeDamageStatus(): Int
 
     companion object {
         const val TAKE_DAMAGE_NIL = 0 //takeDamage() еще не вызывалась
