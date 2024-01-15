@@ -15,5 +15,5 @@ interface BakuganRepository {
     //Запросы
     fun getBakugansForCurrentPlayer(): List<AbstractBakugan>
     fun getBakugansForPlayer(playerId: Id): List<AbstractBakugan>
-    fun getBakuganById(bakuganId: Id): AbstractBakugan
+    fun getBakuganById(bakuganId: Id): AbstractBakugan?
 }

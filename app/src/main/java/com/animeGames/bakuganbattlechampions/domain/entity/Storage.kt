@@ -1,14 +1,18 @@
 package com.animeGames.bakuganbattlechampions.domain.entity
 
 import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
+import com.animeGames.bakuganbattlechampions.data.repository.BakuganRepositoryImpl
+import com.animeGames.bakuganbattlechampions.data.repository.CardRepositoryImpl
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakugan
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractStorage
-import com.animeGames.bakuganbattlechampions.domain.repository.BakuganRepository
 
 class Storage : AbstractStorage() {
 
     private var upgradeBakuganStatus = UPGRADE_BAKUGAN_NIL
+
+    private val cardRepository = CardRepositoryImpl()
+    private val bakuganRepository = BakuganRepositoryImpl()
 
     override fun upgradeBakugan(bakuganId: Id) {
         AppDatabase.getAllBakugans().find { it.id() == bakuganId }?.getActualPower()
@@ -17,11 +21,11 @@ class Storage : AbstractStorage() {
     }
 
     override fun getAllCards(): List<AbstractCard> {
-        return AppDatabase.getAllCards()
+        return cardRepository.getCardsForCurrentPlayer()
     }
 
     override fun getAllBakugans(): List<AbstractBakugan> {
-        return AppDatabase.getAllBakugans()
+        return bakuganRepository.getBakugansForCurrentPlayer()
     }
 
     override fun upgradeBakuganStatus(): Int {

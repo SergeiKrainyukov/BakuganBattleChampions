@@ -22,6 +22,7 @@ import com.animeGames.bakuganbattlechampions.presentation.screens.ProfileScreen
 import com.animeGames.bakuganbattlechampions.presentation.screens.SettingsScreen
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 import com.animeGames.bakuganbattlechampions.presentation.screens.BattleScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.StoreScreen
 import com.animeGames.bakuganbattlechampions.presentation.viewModel.BattleScreenViewModel
 
 class MainActivity : ComponentActivity() {
@@ -56,7 +57,7 @@ fun App(
         composable("main") { MenuScreen(navController) }
         composable("campaign") { BattlesScreen(navController) }
         composable("collections") { CollectionsScreen(navController) }
-        composable("shop") { }
+        composable("shop") { StoreScreen(navController = navController)}
         composable("settings") { SettingsScreen() }
         composable("profile") { ProfileScreen() }
         composable("battle") {
