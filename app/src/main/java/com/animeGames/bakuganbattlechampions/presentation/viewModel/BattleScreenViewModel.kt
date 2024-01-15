@@ -6,13 +6,51 @@ import androidx.lifecycle.ViewModel
 import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakugan
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractPlayer
+import com.animeGames.bakuganbattlechampions.extension.getAbilityCards
+import com.animeGames.bakuganbattlechampions.extension.getGateCards
 
-class BattleScreenViewModel: ViewModel() {
-//    val currentOpponent = AppDatabase.players.find { it.getId() == AppDatabase.currentOpponent!! }!!
-//    val currentPlayer = AppDatabase.currentPlayer
+class BattleScreenViewModel : ViewModel() {
+    private var currentOpponent: AbstractPlayer? = null
+    private val currentPlayer = AppDatabase.currentPlayer
 
     private val _screenState = MutableLiveData<BattleScreenState>()
-    fun screenState(): LiveData<BattleScreenState> = MutableLiveData()
+    fun screenState(): LiveData<BattleScreenState> = _screenState
+
+    fun initData() {
+        currentOpponent = AppDatabase.players.find { it.getId() == AppDatabase.currentOpponentId }
+        currentOpponent?.let {
+            _screenState.value = BattleScreenState(
+                opponentBakugans = it.getActualBakugans(),
+                opponentGateCards = it.getActualCards().getGateCards(),
+                opponentAbilityCards = it.getActualCards().getAbilityCards(),
+                currentUserBakugans = it.getActualBakugans(),
+                currentUserGateCards = it.getActualCards().getGateCards(),
+                currentUserAbilityCards = it.getActualCards().getAbilityCards(),
+                fieldGateCards = listOf(),
+                isGameOver = false,
+                isCurrentUserWon = false
+            )
+        }
+
+    }
+
+    fun onClickEvent(uiEvent: UIEvent) {
+        when (uiEvent) {
+            UIEvent.BakuganClick -> {}
+            UIEvent.GateCardClick -> onClickGateCard()
+            UIEvent.AbilityCardClick -> {}
+        }
+    }
+
+    private fun onClickGateCard() {
+        val gateCard = currentPlayer.getActualCards().getGateCards().first()
+        currentPlayer.removeCard(gateCard.id())
+        _screenState.value = _screenState.value?.copy(
+            fieldGateCards = listOf(gateCard),
+            currentUserGateCards = currentPlayer.getActualCards().getGateCards()
+        )
+    }
 }
 
 data class BattleScreenState(
@@ -39,4 +77,10 @@ data class BattleScreenState(
             isCurrentUserWon = false
         )
     }
+}
+
+sealed class UIEvent {
+    object BakuganClick : UIEvent()
+    object GateCardClick : UIEvent()
+    object AbilityCardClick : UIEvent()
 }

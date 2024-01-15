@@ -8,7 +8,7 @@ class Player(
     private val id: Id,
     private val name: String,
     private val level: Int,
-    abstractCards: List<AbstractCard>,
+    cards: List<AbstractCard>,
     bakugans: List<AbstractBakugan>
 ) : AbstractPlayer() {
 
@@ -19,7 +19,7 @@ class Player(
     private var removeBakuganStatus = REMOVE_BAKUGAN_NIL
 
     init {
-        this.cards = abstractCards.toMutableList()
+        this.cards = cards.toMutableList()
         this.bakugans = bakugans.toMutableList()
     }
 

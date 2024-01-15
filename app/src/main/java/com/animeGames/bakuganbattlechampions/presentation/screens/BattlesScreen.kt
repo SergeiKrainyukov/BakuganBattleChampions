@@ -53,7 +53,7 @@ fun CardsList(navController: NavController, cardItems: List<CardItem>) {
     LazyColumn {
         items(cardItems) { cardItem ->
             CardItemView(cardItem) {
-                AppDatabase.currentOpponent = cardItem.playerId
+                AppDatabase.updateCurrentOpponentLiveData(cardItem.playerId)
                 navController.navigate("battle")
             }
         }

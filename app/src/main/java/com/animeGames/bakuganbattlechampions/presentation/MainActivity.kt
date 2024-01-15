@@ -59,7 +59,10 @@ fun App(
         composable("shop") { }
         composable("settings") { SettingsScreen() }
         composable("profile") { ProfileScreen() }
-        composable("battle") { BattleScreen(battleScreenViewModel) }
+        composable("battle") {
+            battleScreenViewModel.initData()
+            BattleScreen(battleScreenViewModel)
+        }
         composable("card_description") { CardDescriptionScreen() }
     }
 }

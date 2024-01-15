@@ -1,5 +1,7 @@
 package com.animeGames.bakuganbattlechampions.data.database
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractPlayer
 import com.animeGames.bakuganbattlechampions.domain.entity.AbilityCard
 import com.animeGames.bakuganbattlechampions.domain.entity.Bakugan
@@ -19,7 +21,7 @@ object AppDatabase {
         id = Id(0),
         name = "",
         level = 0,
-        abstractCards = listOf(
+        cards = listOf(
             AbilityCard(
                 id = Id(1),
                 bakuganBonus = BakuganBonus(Id(THIRD_BAKUGAN_ID), Power(100))
@@ -34,7 +36,7 @@ object AppDatabase {
             id = Id(1),
             name = "Маручо",
             level = 1,
-            abstractCards = listOf(
+            cards = listOf(
                 AbilityCard(
                     id = Id(1),
                     bakuganBonus = BakuganBonus(Id(FIRST_BAKUGAN_ID), Power(100))
@@ -48,7 +50,7 @@ object AppDatabase {
             id = Id(2),
             name = "Шун Казами",
             level = 2,
-            abstractCards = listOf(
+            cards = listOf(
                 AbilityCard(
                     id = Id(2),
                     bakuganBonus = BakuganBonus(Id(SECOND_BAKUGAN_ID), Power(120))
@@ -60,5 +62,15 @@ object AppDatabase {
         ),
     )
 
-    var currentOpponent: Id? = null
+    private val _currentOpponentLiveData = MutableLiveData<Id>()
+    val currentOpponentLiveData: LiveData<Id> = _currentOpponentLiveData
+
+    private var _currentOpponentId = Id(-1)
+    val currentOpponentId: Id
+        get() = _currentOpponentId
+
+    fun updateCurrentOpponentLiveData(id: Id) {
+        _currentOpponentId = id
+        _currentOpponentLiveData.value = id
+    }
 }
