@@ -16,6 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.animeGames.bakuganbattlechampions.R
+import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
+import com.animeGames.bakuganbattlechampions.domain.entity.Storage
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
@@ -71,7 +73,8 @@ fun UpgradeScreen(
 
 @Composable
 fun CardDescriptionScreen() {
-    val imagePainter = painterResource(id = R.drawable.img_dragonoid) // Replace with your image resource ID
+    val imagePainter =
+        painterResource(id = R.drawable.img_dragonoid) // Replace with your image resource ID
     val title = "Драго"
     val description = "Драго - бакуган Пайруса в виде дракона. Его напарником является Дэн."
 
@@ -80,7 +83,7 @@ fun CardDescriptionScreen() {
         title = title,
         description = description,
         onUpgradeClicked = {
-
+            Storage().upgradeBakugan(AppDatabase.currentPlayer.getActualBakugans().first().id())
         }
     )
 }

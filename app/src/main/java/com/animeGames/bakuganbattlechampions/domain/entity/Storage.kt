@@ -6,9 +6,14 @@ import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractStorage
 import com.animeGames.bakuganbattlechampions.domain.repository.BakuganRepository
 
-class Storage: AbstractStorage() {
-    override fun upgradeBakugan(bakuganId: Id) {
+class Storage : AbstractStorage() {
 
+    private var upgradeBakuganStatus = UPGRADE_BAKUGAN_NIL
+
+    override fun upgradeBakugan(bakuganId: Id) {
+        AppDatabase.getAllBakugans().find { it.id() == bakuganId }?.getActualPower()
+            ?.increase(Power(100))
+        upgradeBakuganStatus = UPGRADE_BAKUGAN_OK
     }
 
     override fun getAllCards(): List<AbstractCard> {
@@ -20,6 +25,6 @@ class Storage: AbstractStorage() {
     }
 
     override fun upgradeBakuganStatus(): Int {
-        return UPGRADE_BAKUGAN_NIL
+        return upgradeBakuganStatus
     }
 }
