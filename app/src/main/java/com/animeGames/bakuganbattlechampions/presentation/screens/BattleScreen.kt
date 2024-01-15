@@ -73,7 +73,8 @@ fun BattleScreen(viewModel: BattleScreenViewModel) {
 
         //Поле игры
         ImageGrid(
-            images = state.fieldGateCards.map { R.drawable.baku_gate_card }
+            cards = state.fieldGateCards.map { R.drawable.baku_gate_card },
+            bakugans = state.fieldBakugans.map { R.drawable.baku_icon }
         )
 
         // Игрок
@@ -101,24 +102,22 @@ fun BattleScreen(viewModel: BattleScreenViewModel) {
 }
 
 @Composable
-fun ImageGrid(images: List<Int>) {
+fun ImageGrid(cards: List<Int>, bakugans: List<Int> ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
     ) {
-        for (i in images.indices step 2) {
+        for (i in cards.indices step 2) {
             Row(
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
                 ImageItem(
-                    imageId = images[i], subImages = if (i == 0) listOf(
-                        R.drawable.baku_icon,
-                        R.drawable.baku_icon
-                    ) else null
+                    imageId = cards[i],
+                    subImages = bakugans
                 )
                 Spacer(modifier = Modifier.width(8.dp))
-                if (i + 1 < images.size) {
-                    ImageItem(imageId = images[i + 1])
+                if (i + 1 < cards.size) {
+                    ImageItem(imageId = cards[i + 1])
                 }
             }
         }
