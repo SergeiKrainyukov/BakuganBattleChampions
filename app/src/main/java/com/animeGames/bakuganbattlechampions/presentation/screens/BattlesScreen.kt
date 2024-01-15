@@ -20,19 +20,20 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
 fun BattlesScreen(navController: NavController) {
-    val cardItems = listOf(
-        CardItem("Бой с Маручо", "Вам предстоит сразиться с противником стихии Аквос", "Уровень 1"),
-        CardItem(
-            "Бой с Шун Казами",
-            "Вам предстоит сразиться с противником стихии Вентус",
-            "Уровень 2"
-        ),
-    )
-
+    val players = AppDatabase.players
+    val cardItems = mutableListOf<CardItem>()
+    players.forEach {
+        cardItems.add(CardItem(
+            title = "Бой с ".plus(it.getName()),
+            description = "Вам предстоит сразиться с ".plus(it.getName()),
+            level = "Уровень ".plus(it.getLevel().toString())
+        ))
+    }
     CardsList(navController, cardItems)
 }
 

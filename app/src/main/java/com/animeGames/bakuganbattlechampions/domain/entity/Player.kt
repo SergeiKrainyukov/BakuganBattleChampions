@@ -5,6 +5,8 @@ import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractPlayer
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
 
 class Player(
+    private val name: String,
+    private val level: Int,
     abstractCards: List<AbstractCard>,
     bakugans: List<AbstractBakugan>
 ) : AbstractPlayer() {
@@ -35,6 +37,10 @@ class Player(
     override fun getActualCards() = cards
 
     override fun getActualBakugans() = bakugans
+
+    override fun getName() = name
+
+    override fun getLevel() = level
 
     override fun removeCardStatus() = removeCardStatus
 
