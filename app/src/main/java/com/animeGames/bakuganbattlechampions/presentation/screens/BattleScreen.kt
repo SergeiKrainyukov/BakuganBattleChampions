@@ -1,5 +1,6 @@
 package com.animeGames.bakuganbattlechampions.presentation.screens
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -13,16 +14,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.animeGames.bakuganbattlechampions.R
-import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
 import com.animeGames.bakuganbattlechampions.extension.getAbilityCards
 import com.animeGames.bakuganbattlechampions.extension.getGateCards
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
+import com.animeGames.bakuganbattlechampions.presentation.viewModel.BattleScreenViewModel
+
+import androidx.compose.runtime.livedata.observeAsState
+import com.animeGames.bakuganbattlechampions.presentation.viewModel.BattleScreenState
 
 @Composable
 fun IconTextRow(imageId: Int, text: String) {
@@ -42,52 +47,46 @@ fun IconTextRow(imageId: Int, text: String) {
 
 
 @Composable
-fun BattleScreen() {
-    val currentOpponent = AppDatabase.players.find { it.getId() == AppDatabase.currentOpponent!! }!!
-    val currentPlayer = AppDatabase.currentPlayer
+fun BattleScreen(viewModel: BattleScreenViewModel) {
+    val state by viewModel.screenState().observeAsState(BattleScreenState.initial())
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        // Верхняя часть экрана
+        // Противник
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             IconTextRow(
                 imageId = R.drawable.baku_icon,
-                text = "x${currentOpponent.getActualBakugans().size}"
+                text = "x${state.opponentBakugans.size}"
             )
             IconTextRow(
                 imageId = R.drawable.baku_gate_card,
-                text = "x${currentOpponent.getActualCards().getGateCards().size}"
+                text = "x${state.opponentGateCards.size}"
             )
             IconTextRow(
                 imageId = R.drawable.baku_card,
-                text = "x${currentOpponent.getActualCards().getAbilityCards().size}"
+                text = "x${state.opponentAbilityCards.size}"
             )
         }
 
-        // Центральная часть экрана (пока пустая)
+        //Поле игры
         ImageGrid(
-            images = listOf(
-                R.drawable.baku_gate_card,
-//                R.drawable.baku_gate_card,
-//                R.drawable.baku_gate_card,
-//                R.drawable.baku_gate_card
-            )
+            images = state.fieldGateCards.map { R.drawable.baku_gate_card }
         )
 
-        // Нижняя часть экрана
+        // Игрок
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             IconTextRow(
                 imageId = R.drawable.baku_icon,
-                text = "x${currentPlayer.getActualBakugans().size}"
+                text = "x${state.currentUserBakugans.size}"
             )
             IconTextRow(
                 imageId = R.drawable.baku_gate_card,
-                text = "x${currentPlayer.getActualCards().getGateCards().size}"
+                text = "x${state.currentUserGateCards.size}"
             )
             IconTextRow(
                 imageId = R.drawable.baku_card,
-                text = "x${currentPlayer.getActualCards().getAbilityCards().size}"
+                text = "x${state.currentUserAbilityCards.size}"
             )
         }
     }
@@ -148,6 +147,6 @@ fun ImageItem(imageId: Int, subImages: List<Int>? = null) {
 @Composable
 fun BattleScreenPreview() {
     BakuganBattleChampionsTheme {
-        BattleScreen()
+        BattleScreen(BattleScreenViewModel())
     }
 }
