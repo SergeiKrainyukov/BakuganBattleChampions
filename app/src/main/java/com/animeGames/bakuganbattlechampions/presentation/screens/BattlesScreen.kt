@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
+import com.animeGames.bakuganbattlechampions.domain.entity.Id
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
@@ -28,11 +29,14 @@ fun BattlesScreen(navController: NavController) {
     val players = AppDatabase.players
     val cardItems = mutableListOf<CardItem>()
     players.forEach {
-        cardItems.add(CardItem(
-            title = "Бой с ".plus(it.getName()),
-            description = "Вам предстоит сразиться с ".plus(it.getName()),
-            level = "Уровень ".plus(it.getLevel().toString())
-        ))
+        cardItems.add(
+            CardItem(
+                title = "Бой с ".plus(it.getName()),
+                description = "Вам предстоит сразиться с ".plus(it.getName()),
+                level = "Уровень ".plus(it.getLevel().toString()),
+                playerId = it.getId()
+            )
+        )
     }
     CardsList(navController, cardItems)
 }
@@ -40,14 +44,16 @@ fun BattlesScreen(navController: NavController) {
 data class CardItem(
     val title: String,
     val description: String,
-    val level: String
+    val level: String,
+    val playerId: Id
 )
 
 @Composable
 fun CardsList(navController: NavController, cardItems: List<CardItem>) {
     LazyColumn {
         items(cardItems) { cardItem ->
-            CardItemView(cardItem){
+            CardItemView(cardItem) {
+                AppDatabase.currentOpponent = cardItem.playerId
                 navController.navigate("battle")
             }
         }

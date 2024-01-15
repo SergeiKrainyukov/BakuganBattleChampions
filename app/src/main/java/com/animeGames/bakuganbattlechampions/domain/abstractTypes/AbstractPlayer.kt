@@ -20,6 +20,7 @@ abstract class AbstractPlayer {
     abstract fun getActualBakugans(): List<AbstractBakugan>
     abstract fun getName(): String
     abstract fun getLevel(): Int
+    abstract fun getId(): Id
 
     //Запросы статусов:
     abstract fun removeCardStatus(): Int

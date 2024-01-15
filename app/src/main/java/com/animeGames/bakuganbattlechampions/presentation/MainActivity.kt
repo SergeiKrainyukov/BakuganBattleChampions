@@ -18,7 +18,7 @@ import com.animeGames.bakuganbattlechampions.presentation.screens.MenuScreen
 import com.animeGames.bakuganbattlechampions.presentation.screens.ProfileScreen
 import com.animeGames.bakuganbattlechampions.presentation.screens.SettingsScreen
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
-import com.animeGames.bakuganbattlechampions.presentation.theme.BattleScreen
+import com.animeGames.bakuganbattlechampions.presentation.screens.BattleScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

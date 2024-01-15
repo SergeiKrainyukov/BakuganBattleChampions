@@ -16,6 +16,7 @@ object AppDatabase {
     private const val THIRD_BAKUGAN_ID = 3
 
     val currentPlayer = Player(
+        id = Id(0),
         name = "",
         level = 0,
         abstractCards = listOf(
@@ -30,6 +31,7 @@ object AppDatabase {
     )
     val players: List<AbstractPlayer> = listOf(
         Player(
+            id = Id(1),
             name = "Маручо",
             level = 1,
             abstractCards = listOf(
@@ -43,6 +45,7 @@ object AppDatabase {
             )
         ),
         Player(
+            id = Id(2),
             name = "Шун Казами",
             level = 2,
             abstractCards = listOf(
@@ -56,4 +59,6 @@ object AppDatabase {
             )
         ),
     )
+
+    var currentOpponent: Id? = null
 }
