@@ -1,5 +1,6 @@
 package com.animeGames.bakuganbattlechampions.presentation.viewModel
 
+import android.os.Handler
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,7 +29,8 @@ class BattleScreenViewModel : ViewModel() {
                 currentUserGateCards = it.getActualCards().getGateCards(),
                 currentUserAbilityCards = it.getActualCards().getAbilityCards(),
                 fieldGateCards = listOf(),
-                fieldBakugans = listOf(),
+                currentUserFieldBakugans = listOf(),
+                opponentFieldBakugans = listOf(),
                 isGameOver = false,
                 isCurrentUserWon = false
             )
@@ -60,25 +62,65 @@ class BattleScreenViewModel : ViewModel() {
         val bakugan = currentPlayer.getActualBakugans().first()
         currentPlayer.removeBakugan(bakugan.id())
         _screenState.value = _screenState.value?.copy(
-            fieldBakugans = listOf(bakugan),
+            currentUserFieldBakugans = listOf(bakugan),
             currentUserBakugans = currentPlayer.getActualBakugans()
         )
     }
 
     private fun onAbilityCardClick() {
-        _screenState.value?.let { if (it.fieldGateCards.isEmpty() || it.fieldBakugans.isEmpty()) return }
+        _screenState.value?.let { if (it.fieldGateCards.isEmpty() || it.currentUserFieldBakugans.isEmpty()) return }
         if (currentPlayer.getActualCards().getAbilityCards().isEmpty()) return
         val abilityCard = currentPlayer.getActualCards().getAbilityCards().first()
         currentPlayer.removeCard(abilityCard.id())
         _screenState.value?.let {
-            it.fieldBakugans.forEach { abilityCard.activate(it) }
+            it.currentUserFieldBakugans.forEach { abilityCard.activate(it) }
             _screenState.value = _screenState.value?.copy(
                 currentUserAbilityCards = currentPlayer.getActualCards().getGateCards(),
-                fieldBakugans = it.fieldBakugans
+                currentUserFieldBakugans = it.currentUserFieldBakugans
             )
+        }
+        checkGameState()
+    }
+
+    private fun checkGameState() {
+        _screenState.value?.let {
+            if (it.currentUserBakugans.isEmpty() && it.currentUserGateCards.isEmpty() && it.currentUserAbilityCards.isEmpty()) {
+                Handler().postDelayed({
+                    val bakugan = currentOpponent!!.getActualBakugans().first()
+                    currentOpponent!!.removeBakugan(bakugan.id())
+                    _screenState.value = it.copy(
+                        opponentBakugans = currentOpponent!!.getActualBakugans(),
+                        opponentFieldBakugans = listOf(bakugan)
+                    )
+                }, 1_000)
+            }
+        }
+        Handler().postDelayed({
+            val abilityCard = currentOpponent!!.getActualCards().getAbilityCards().first()
+            currentOpponent!!.removeCard(abilityCard.id())
+            _screenState.value = _screenState.value?.copy(
+                opponentAbilityCards = currentOpponent!!.getActualCards().getAbilityCards()
+            )
+        }, 2_000)
+        Handler().postDelayed({
+            calculateBattleResult()
+        }, 3_000)
+    }
+
+    private fun calculateBattleResult() {
+        _screenState.value?.let {
+            if (it.opponentFieldBakugans.first().getActualPower()
+                    .getActualValue() > it.currentUserFieldBakugans.first().getActualPower()
+                    .getActualValue()
+            ) {
+                _screenState.value = it.copy(isCurrentUserWon = false, isGameOver = true)
+                return
+            }
+            _screenState.value = it.copy(isCurrentUserWon = true, isGameOver = true)
         }
     }
 }
+
 
 data class BattleScreenState(
     val opponentBakugans: List<AbstractBakugan>,
@@ -88,7 +130,8 @@ data class BattleScreenState(
     val currentUserGateCards: List<AbstractCard>,
     val currentUserAbilityCards: List<AbstractCard>,
     val fieldGateCards: List<AbstractCard>,
-    val fieldBakugans: List<AbstractBakugan>,
+    val currentUserFieldBakugans: List<AbstractBakugan>,
+    val opponentFieldBakugans: List<AbstractBakugan>,
     val isGameOver: Boolean,
     val isCurrentUserWon: Boolean
 ) {
@@ -101,7 +144,8 @@ data class BattleScreenState(
             currentUserGateCards = listOf(),
             currentUserAbilityCards = listOf(),
             fieldGateCards = listOf(),
-            fieldBakugans = listOf(),
+            currentUserFieldBakugans = listOf(),
+            opponentFieldBakugans = listOf(),
             isGameOver = false,
             isCurrentUserWon = false
         )

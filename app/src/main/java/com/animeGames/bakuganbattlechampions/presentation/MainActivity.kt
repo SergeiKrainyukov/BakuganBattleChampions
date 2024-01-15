@@ -61,7 +61,7 @@ fun App(
         composable("profile") { ProfileScreen() }
         composable("battle") {
             battleScreenViewModel.initData()
-            BattleScreen(battleScreenViewModel)
+            BattleScreen(battleScreenViewModel, navController)
         }
         composable("card_description") { CardDescriptionScreen() }
     }

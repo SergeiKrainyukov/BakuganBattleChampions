@@ -12,6 +12,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.animeGames.bakuganbattlechampions.R
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 import com.animeGames.bakuganbattlechampions.presentation.viewModel.BattleScreenState
@@ -31,11 +34,13 @@ import com.animeGames.bakuganbattlechampions.presentation.viewModel.UIEvent
 fun IconTextRow(imageId: Int, text: String, onClick: (() -> Unit)? = null) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
-        modifier = Modifier.padding(8.dp).clickable {
-            if (onClick != null) {
-                onClick()
+        modifier = Modifier
+            .padding(8.dp)
+            .clickable {
+                if (onClick != null) {
+                    onClick()
+                }
             }
-        }
     ) {
         Image(
             painter = painterResource(id = imageId),
@@ -49,8 +54,37 @@ fun IconTextRow(imageId: Int, text: String, onClick: (() -> Unit)? = null) {
 
 
 @Composable
-fun BattleScreen(viewModel: BattleScreenViewModel) {
+fun BattleScreen(viewModel: BattleScreenViewModel, navController: NavController) {
     val state by viewModel.screenState().observeAsState(BattleScreenState.initial())
+    if (state.isGameOver && state.isCurrentUserWon) {
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text(text = "Вы выиграли") },
+            text = { Text(text = "") },
+            confirmButton = {
+                Button(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Text("ОК")
+                }
+            },
+        )
+    }
+
+    if (state.isGameOver && !state.isCurrentUserWon) {
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text(text = "Вы проиграли") },
+            text = { Text(text = "") },
+            confirmButton = {
+                Button(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Text("ОК")
+                }
+            },
+        )
+    }
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.SpaceBetween
@@ -74,8 +108,10 @@ fun BattleScreen(viewModel: BattleScreenViewModel) {
         //Поле игры
         ImageGrid(
             cards = state.fieldGateCards.map { R.drawable.baku_gate_card },
-            bakugans = state.fieldBakugans.map { R.drawable.baku_icon }
+            bakugans = state.currentUserFieldBakugans.map { R.drawable.baku_icon }
+                .plus(state.opponentFieldBakugans.map { R.drawable.baku_icon })
         )
+
 
         // Игрок
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -102,7 +138,7 @@ fun BattleScreen(viewModel: BattleScreenViewModel) {
 }
 
 @Composable
-fun ImageGrid(cards: List<Int>, bakugans: List<Int> ) {
+fun ImageGrid(cards: List<Int>, bakugans: List<Int>) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxWidth()
@@ -154,6 +190,5 @@ fun ImageItem(imageId: Int, subImages: List<Int>? = null) {
 @Composable
 fun BattleScreenPreview() {
     BakuganBattleChampionsTheme {
-        BattleScreen(BattleScreenViewModel())
     }
 }
