@@ -55,6 +55,7 @@ class BattleScreenViewModel : ViewModel() {
     }
 
     private fun onClickBakugan() {
+        _screenState.value?.let { if (it.fieldGateCards.isEmpty()) return }
         if (currentPlayer.getActualBakugans().isEmpty()) return
         val bakugan = currentPlayer.getActualBakugans().first()
         currentPlayer.removeBakugan(bakugan.id())
@@ -65,12 +66,17 @@ class BattleScreenViewModel : ViewModel() {
     }
 
     private fun onAbilityCardClick() {
+        _screenState.value?.let { if (it.fieldGateCards.isEmpty() || it.fieldBakugans.isEmpty()) return }
         if (currentPlayer.getActualCards().getAbilityCards().isEmpty()) return
         val abilityCard = currentPlayer.getActualCards().getAbilityCards().first()
         currentPlayer.removeCard(abilityCard.id())
-        _screenState.value = _screenState.value?.copy(
-            currentUserAbilityCards = currentPlayer.getActualCards().getGateCards()
-        )
+        _screenState.value?.let {
+            it.fieldBakugans.forEach { abilityCard.activate(it) }
+            _screenState.value = _screenState.value?.copy(
+                currentUserAbilityCards = currentPlayer.getActualCards().getGateCards(),
+                fieldBakugans = it.fieldBakugans
+            )
+        }
     }
 }
 
