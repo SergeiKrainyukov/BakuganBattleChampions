@@ -1,7 +1,7 @@
 package com.animeGames.bakuganbattlechampions.data.database
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakugan
+import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractCard
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractPlayer
 import com.animeGames.bakuganbattlechampions.domain.entity.AbilityCard
 import com.animeGames.bakuganbattlechampions.domain.entity.Bakugan
@@ -25,10 +25,11 @@ object AppDatabase {
             AbilityCard(
                 id = Id(1),
                 bakuganBonus = BakuganBonus(Id(THIRD_BAKUGAN_ID), Power(100))
-            ), GateCard(Id(3), BakuganBonus(Id(THIRD_BAKUGAN_ID), Power(90)))
+            ),
+            GateCard(Id(3), BakuganBonus(Id(THIRD_BAKUGAN_ID), Power(90)))
         ),
         bakugans = listOf(
-            Bakugan(id = Id(THIRD_BAKUGAN_ID), power = Power(450)),
+            Bakugan(id = Id(THIRD_BAKUGAN_ID), name = "Pyrus Dragonoid", power = Power(450)),
         )
     )
     val players: List<AbstractPlayer> = listOf(
@@ -40,10 +41,11 @@ object AppDatabase {
                 AbilityCard(
                     id = Id(1),
                     bakuganBonus = BakuganBonus(Id(FIRST_BAKUGAN_ID), Power(100))
-                ), GateCard(Id(1), BakuganBonus(Id(FIRST_BAKUGAN_ID), Power(90)))
+                ),
+                GateCard(Id(1), BakuganBonus(Id(FIRST_BAKUGAN_ID), Power(90)))
             ),
             bakugans = listOf(
-                Bakugan(id = Id(FIRST_BAKUGAN_ID), power = Power(350)),
+                Bakugan(id = Id(FIRST_BAKUGAN_ID), name = "Subterra Mantris", power = Power(350)),
             )
         ),
         Player(
@@ -57,13 +59,10 @@ object AppDatabase {
                 ), GateCard(Id(2), BakuganBonus(Id(SECOND_BAKUGAN_ID), Power(70)))
             ),
             bakugans = listOf(
-                Bakugan(id = Id(SECOND_BAKUGAN_ID), power = Power(400)),
+                Bakugan(id = Id(SECOND_BAKUGAN_ID), name = "Ventus Ingram", power = Power(400)),
             )
         ),
     )
-
-    private val _currentOpponentLiveData = MutableLiveData<Id>()
-    val currentOpponentLiveData: LiveData<Id> = _currentOpponentLiveData
 
     private var _currentOpponentId = Id(-1)
     val currentOpponentId: Id
@@ -71,6 +70,35 @@ object AppDatabase {
 
     fun updateCurrentOpponentLiveData(id: Id) {
         _currentOpponentId = id
-        _currentOpponentLiveData.value = id
+    }
+
+    fun getAllBakugans(): List<Bakugan> {
+        val bakugans = mutableListOf<Bakugan>()
+        bakugans.apply {
+            add(Bakugan(id = Id(FIRST_BAKUGAN_ID), name = "Subterra Mantris", power = Power(350)))
+            add(Bakugan(id = Id(SECOND_BAKUGAN_ID), name = "Ventus Ingram", power = Power(400)))
+        }
+        return bakugans
+    }
+
+    fun getAllCards(): List<AbstractCard> {
+        val cards = mutableListOf<AbstractCard>()
+        cards.apply {
+            add(
+                AbilityCard(
+                    id = Id(1),
+                    bakuganBonus = BakuganBonus(Id(THIRD_BAKUGAN_ID), Power(100))
+                )
+            )
+            add(GateCard(Id(3), BakuganBonus(Id(THIRD_BAKUGAN_ID), Power(90))))
+            add(
+                AbilityCard(
+                    id = Id(1),
+                    bakuganBonus = BakuganBonus(Id(FIRST_BAKUGAN_ID), Power(100))
+                )
+            )
+            add(GateCard(Id(1), BakuganBonus(Id(FIRST_BAKUGAN_ID), Power(90))))
+        }
+        return cards
     }
 }

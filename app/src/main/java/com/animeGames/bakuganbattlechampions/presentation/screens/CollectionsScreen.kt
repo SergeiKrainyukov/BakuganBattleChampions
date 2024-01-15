@@ -33,6 +33,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.animeGames.bakuganbattlechampions.R
+import com.animeGames.bakuganbattlechampions.data.database.AppDatabase
+import com.animeGames.bakuganbattlechampions.domain.entity.Storage
 import com.animeGames.bakuganbattlechampions.presentation.theme.BakuganBattleChampionsTheme
 
 @Composable
@@ -90,11 +92,13 @@ fun CardItem(imageId: Int, title: String, description: String, onClick: () -> Un
 
 @Composable
 fun CollectionsScreen(navController: NavController) {
-    val cardItems = listOf(
-        Pair(R.drawable.baku_icon, "Pyrus Dragonoid" to "Very Strong Character"),
-        Pair(R.drawable.baku_icon, "Pyrus Dragonoid" to "Very Strong Character"),
-        Pair(R.drawable.baku_icon, "Pyrus Dragonoid" to "Very Strong Character")
-    )
+
+    val allBakugans = Storage().getAllBakugans()
+    val cardItems = mutableListOf<Pair<Int, Pair<String, String>>>()
+
+    allBakugans.forEach {
+        cardItems.add(Pair(R.drawable.baku_icon, it.name() to "Very Strong Character"),)
+    }
 
     Column {
         FilterBar(

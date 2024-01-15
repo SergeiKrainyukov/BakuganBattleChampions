@@ -17,6 +17,7 @@ abstract class AbstractBakugan {
     //запросы
     abstract fun getActualPower(): Power
     abstract fun id(): Id
+    abstract fun name(): String
 
     //запросы статусов
     abstract fun getTakeDamageStatus(): Int

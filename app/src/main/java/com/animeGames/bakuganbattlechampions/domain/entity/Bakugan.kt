@@ -4,8 +4,9 @@ import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakuga
 
 class Bakugan(
     private val id: Id,
+    private val name: String,
     private val power: Power
-): AbstractBakugan() {
+) : AbstractBakugan() {
 
     private var takeDamageStatus = TAKE_DAMAGE_NIL
 
@@ -25,6 +26,8 @@ class Bakugan(
     override fun getActualPower() = power
 
     override fun id() = id
+
+    override fun name() = name
 
     override fun getTakeDamageStatus() = takeDamageStatus
 }
