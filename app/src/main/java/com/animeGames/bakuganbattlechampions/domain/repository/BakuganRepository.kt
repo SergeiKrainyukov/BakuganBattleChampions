@@ -1,6 +1,7 @@
 package com.animeGames.bakuganbattlechampions.domain.repository
 
 import com.animeGames.bakuganbattlechampions.domain.abstractTypes.AbstractBakugan
+import com.animeGames.bakuganbattlechampions.domain.entity.Bakugan
 import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 //АТД репозиторий для бакуганов
@@ -14,4 +15,5 @@ interface BakuganRepository {
     //Запросы
     fun getBakugansForCurrentPlayer(): List<AbstractBakugan>
     fun getBakugansForPlayer(playerId: Id): List<AbstractBakugan>
+    fun getBakuganById(bakuganId: Id): AbstractBakugan
 }

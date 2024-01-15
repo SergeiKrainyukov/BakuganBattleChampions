@@ -3,7 +3,7 @@ package com.animeGames.bakuganbattlechampions.domain.abstractTypes
 import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 //АТД Хранилище
-abstract class Storage {
+abstract class AbstractStorage {
 
     //команды
     //предусловие: количество средств на счете игрока >= стоимости улучшения бакугана

@@ -3,7 +3,7 @@ package com.animeGames.bakuganbattlechampions.domain.abstractTypes
 import com.animeGames.bakuganbattlechampions.domain.entity.Id
 
 //АТД Магазин
-abstract class Store {
+abstract class AbstractStore {
 
     //команды
     //предусловие: количество средств на счете игрока >= стоимости бакугана
